@@ -33,9 +33,9 @@ fun UnitList(
 private fun PreviewUnitList() {
     UnitList(
         list = listOf(
-            UnitModel(name = "cm", selected = true),
-            UnitModel(name = "m", selected = false),
-            UnitModel(name = "km", selected = false)
+            UnitModel(name = "cm", selected = true, type = "Length", value = ""),
+            UnitModel(name = "m", selected = false, type = "Length", value = ""),
+            UnitModel(name = "km", selected = false, type = "Length", value = "")
         )
     )
 }
