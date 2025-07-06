@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import org.converter.core.presentation.focusClick
 import org.converter.units.presentation.ui.UnitsScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -17,6 +18,7 @@ fun App() {
     val navController = rememberNavController()
     MaterialTheme {
         Scaffold(
+            modifier = Modifier.focusClick(),
             content = { innerPadding ->
                 NavHost(
                     modifier = Modifier.padding(innerPadding),

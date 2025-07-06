@@ -19,6 +19,21 @@ interface UnitDao {
     @Delete
     suspend fun delete(unit: UnitEntity)
 
+    @Query("SELECT * FROM UnitEntity WHERE selected = 1 LIMIT 1")
+    suspend fun getSelected(): UnitEntity?
+
     @Query("SELECT * FROM UnitEntity WHERE type = :type")
-    fun getList(type: String): Flow<List<UnitEntity>>
+    fun getListFlow(type: String): Flow<List<UnitEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertList(map: List<UnitEntity>)
+
+    @Query("DELETE FROM UnitEntity")
+    suspend fun clear()
+
+    @Query("UPDATE UnitEntity SET selected = 0")
+    suspend fun resetSelection()
+
+    @Upsert
+    suspend fun setSelectedUnit(mapToEntity: UnitEntity)
 }

@@ -5,10 +5,23 @@ import org.converter.units.domain.UnitModel
 import org.converter.units.domain.UnitRepository
 
 class UnitRepositoryImpl(private val cache: UnitDao) : UnitRepository {
+    override suspend fun setUnitList(list: List<UnitModel>) {
+        val selectedUnit = cache.getSelected()
+        cache.clear()
+        cache.insertList(
+            list.map { it.mapToEntity().copy(selected = it.name == selectedUnit?.name) }
+        )
+    }
+
     override suspend fun addUnit(unit: UnitModel) = cache.insert(unit.mapToEntity())
 
     override suspend fun deleteUnit(unit: UnitModel) = cache.delete(unit.mapToEntity())
 
-    override suspend fun getUnitList(type: String) =
-        cache.getList(type).map { it.map { unit -> unit.mapToDomain() } }
+    override suspend fun getUnitListFlow(type: String) =
+        cache.getListFlow(type).map { it.map { unit -> unit.mapToDomain() } }
+
+    override suspend fun setSelectedUnit(unit: UnitModel) {
+        cache.resetSelection()
+        cache.setSelectedUnit(unit.mapToEntity().copy(selected = true))
+    }
 }

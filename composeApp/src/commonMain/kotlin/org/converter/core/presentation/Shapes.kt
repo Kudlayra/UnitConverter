@@ -2,4 +2,4 @@ package org.converter.core.presentation
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 
-val rounded10Shape = RoundedCornerShape(corner10)
+val rounded16Shape = RoundedCornerShape(corner16)
