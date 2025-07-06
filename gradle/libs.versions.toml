@@ -13,6 +13,9 @@ room = "2.7.2"
 ksp = "2.2.0-2.0.2"
 sqlite = "2.5.2"
 koin = "4.1.0"
+navigationCompose = "2.9.0-beta03"
+serialization = "2.2.0"
+serialization-json = "1.9.0"
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
@@ -31,7 +34,11 @@ koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
 
+navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization-json" }
+
 [plugins]
+serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serialization" }
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }

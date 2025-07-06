@@ -5,6 +5,8 @@ import org.converter.units.data.UnitRepositoryImpl
 import org.converter.units.data.database.DatabaseFactory
 import org.converter.units.domain.UnitRepository
 import org.converter.units.domain.UnitUseCase
+import org.converter.units.presentation.UnitsViewModel
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 val sharedModule = module {
@@ -18,4 +20,5 @@ val sharedModule = module {
             .build()
 
     }
+    viewModelOf(::UnitsViewModel)
 }

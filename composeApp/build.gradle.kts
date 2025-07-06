@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.serialization)
 }
 
 kotlin {
@@ -53,6 +54,9 @@ kotlin {
             api(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
+
+            implementation(libs.navigation.compose)
+            implementation(libs.serialization.json)
         }
     }
 
