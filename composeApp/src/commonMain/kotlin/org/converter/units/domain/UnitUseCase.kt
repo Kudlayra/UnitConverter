@@ -11,4 +11,6 @@ class UnitUseCase(private val repository: UnitRepository) {
     suspend fun deleteUnit(unit: UnitModel) = repository.deleteUnit(unit)
 
     suspend fun getUnitListFlow(type: String) = repository.getUnitListFlow(type)
+
+    suspend fun syncUnitList() = repository.syncUnitList()
 }

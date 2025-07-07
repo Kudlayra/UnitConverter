@@ -13,4 +13,6 @@ interface UnitRepository {
     suspend fun getUnitListFlow(type: String): Flow<List<UnitModel>>
 
     suspend fun setSelectedUnit(unit: UnitModel)
+
+    suspend fun syncUnitList()
 }

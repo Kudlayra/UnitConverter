@@ -11,18 +11,18 @@ data class UnitEntity(
     @PrimaryKey
     val name: String,
     @ColumnInfo
-    val shortName: String,
+    val shortName: String?,
     @ColumnInfo
-    val pluralName: String,
+    val pluralName: String?,
     @ColumnInfo
-    val value: String,
+    val value: String?,
     @ColumnInfo
-    val type: String,
+    val type: String?,
     @ColumnInfo
     val selected: Boolean = false,
 )
 
 fun UnitEntity.mapToDomain() =
-    UnitModel(name, shortName, pluralName, value, enumValueOf<UnitType>(type), selected)
+    UnitModel(name, shortName, pluralName, value, type?.let { enumValueOf<UnitType>(it) }, selected)
 
-fun UnitModel.mapToEntity() = UnitEntity(name, shortName, pluralName, value, type.name, selected)
+fun UnitModel.mapToEntity() = UnitEntity(name, shortName, pluralName, value, type?.name, selected)
