@@ -23,7 +23,7 @@ interface UnitDao {
     suspend fun getSelected(): UnitEntity?
 
     @Query("SELECT * FROM UnitEntity WHERE type = :type")
-    fun getListFlow(type: String): Flow<List<UnitEntity>>
+    fun getListFlow(type: String): Flow<List<UnitEntity>?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertList(map: List<UnitEntity>)

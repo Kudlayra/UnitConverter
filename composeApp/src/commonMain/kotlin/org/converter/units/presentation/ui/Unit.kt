@@ -2,7 +2,7 @@ package org.converter.units.presentation.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -13,6 +13,7 @@ import org.converter.core.presentation.green
 import org.converter.core.presentation.lightGreen
 import org.converter.core.presentation.margin16
 import org.converter.core.presentation.rounded16Shape
+import org.converter.core.presentation.size56
 import org.converter.core.presentation.text18BoldStyle
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -25,11 +26,11 @@ fun Unit(
 ) {
     Text(
         modifier = modifier
+            .size(size56)
             .clip(rounded16Shape)
+            .focusClick(onClick = onClick)
             .background(if (isSelected == true) green else lightGreen)
-            .padding(margin16)
-            .wrapContentSize()
-            .focusClick(onClick = onClick),
+            .padding(margin16),
         style = text18BoldStyle,
         text = name.orEmpty(),
         textAlign = TextAlign.Center

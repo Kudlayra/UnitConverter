@@ -4,7 +4,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -14,7 +13,7 @@ import org.converter.units.domain.UnitModel
 import org.converter.units.domain.UnitType
 import org.converter.units.domain.UnitUseCase
 
-class UnitsViewModel(private val unitUseCase: UnitUseCase, ) : ViewModel() {
+class UnitsViewModel(private val unitUseCase: UnitUseCase) : ViewModel() {
 
     val inputState = TextInputModel()
 
@@ -26,14 +25,10 @@ class UnitsViewModel(private val unitUseCase: UnitUseCase, ) : ViewModel() {
     private val uiEvent = Channel<UiEvent?>()
 
     init {
+        viewModelScope.launch { unitUseCase.syncUnitList() }
+
         viewModelScope.launch {
-            delay(5000L)
-            unitUseCase.syncUnitList()
-        }
-        viewModelScope.launch {
-            unitUseCase.getUnitListFlow(selectedType.value.name).collect {
-                _unitList.value = it
-            }
+            unitUseCase.getUnitListFlow(selectedType.value.name).collect { _unitList.value = it }
         }
     }
 
