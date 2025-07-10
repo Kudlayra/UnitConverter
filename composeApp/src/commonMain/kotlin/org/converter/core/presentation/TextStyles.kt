@@ -8,4 +8,8 @@ val text18style = TextStyle(fontSize = 18.sp)
 
 val text18BoldStyle = text18style.copy(fontWeight = FontWeight.Bold)
 
+val text18WhiteStyle = TextStyle(fontSize = 18.sp, color = white)
+
+val text18WhiteBoldStyle = text18WhiteStyle.copy(fontWeight = FontWeight.Bold)
+
 val text34style = TextStyle(fontSize = 34.sp)
