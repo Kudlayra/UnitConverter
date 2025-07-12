@@ -24,7 +24,7 @@ class UnitRepositoryImpl(
 
     override suspend fun setSelectedUnit(unit: UnitModel) {
         safeExecute {
-            cache.resetSelection()
+            cache.resetSelection(unit.type?.name.orEmpty())
             cache.setSelectedUnit(unit.mapToEntity().copy(selected = true))
         }
     }
@@ -32,11 +32,11 @@ class UnitRepositoryImpl(
     override suspend fun syncUnitList() {
         safeExecute {
             remote.getUnitList()?.map { it.mapToDomain() }?.also { list ->
-                val selectedUnit = cache.getSelected()
+                val selectedList = cache.getSelected().orEmpty()
                 cache.clear()
-                cache.insertList(
-                    list.map { it.mapToEntity().copy(selected = it.name == selectedUnit?.name) }
-                )
+                cache.insertList(list.map { unit ->
+                    unit.mapToEntity().copy(selected = selectedList.any { it.name == unit.name })
+                })
             }
         }
     }

@@ -5,12 +5,16 @@ import org.converter.units.domain.UnitModel
 
 const val SCALE: Short = 10
 
-expect fun UnitModel.convert(inputValue: String): Double
+expect fun UnitModel.convert(unitValue: Double?, inputValue: Double?): CalculatedResultModel
 
-fun UnitModel.getPlural(value: Double): CalculatedResultModel {
-    val unitName = when (value) {
+fun UnitModel.getPlural(value: Double): String {
+    return when (value) {
         DOUBLE_EMPTY, DOUBLE_ONE -> name
         else -> pluralName
     }.orEmpty()
-    return CalculatedResultModel(value.toString(), unitName)
+}
+
+fun List<UnitModel>.mapToCalculatedList(inputValue: String): List<CalculatedResultModel> {
+    val selected = find { unit -> unit.selected }?.value?.toDoubleOrNull()
+    return map { it.convert(selected, inputValue.toDoubleOrNull()) }
 }

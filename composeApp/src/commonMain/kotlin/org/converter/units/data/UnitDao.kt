@@ -20,7 +20,7 @@ interface UnitDao {
     suspend fun delete(unit: UnitEntity)
 
     @Query("SELECT * FROM UnitEntity WHERE selected = 1 LIMIT 1")
-    suspend fun getSelected(): UnitEntity?
+    suspend fun getSelected(): List<UnitEntity>?
 
     @Query("SELECT * FROM UnitEntity WHERE type = :type")
     fun getListFlow(type: String): Flow<List<UnitEntity>?>
@@ -31,8 +31,8 @@ interface UnitDao {
     @Query("DELETE FROM UnitEntity")
     suspend fun clear()
 
-    @Query("UPDATE UnitEntity SET selected = 0")
-    suspend fun resetSelection()
+    @Query("UPDATE UnitEntity SET selected = 0 WHERE type IS :type")
+    suspend fun resetSelection(type: String)
 
     @Upsert
     suspend fun setSelectedUnit(mapToEntity: UnitEntity)

@@ -43,7 +43,7 @@ fun UnitList(
                 BaseShimmerBox(modifier = modifier.size(size56))
             }
         } else {
-            items(list.orEmpty()) { unit ->
+            items(list.orEmpty(), key = { it.name }) { unit ->
                 Unit(
                     name = unit.shortName,
                     isSelected = unit.selected

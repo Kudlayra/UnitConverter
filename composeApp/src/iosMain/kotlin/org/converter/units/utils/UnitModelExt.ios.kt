@@ -1,11 +1,15 @@
 package org.converter.units.utils
 
+import org.converter.units.domain.CalculatedResultModel
 import org.converter.units.domain.UnitModel
 import platform.Foundation.*
 
-actual fun UnitModel.convert(inputValue: String): Double {
-    return inputValue.toDoubleOrNull()?.let { inputDouble ->
-        val valueDecimal = NSDecimalNumber(inputDouble)
+actual fun UnitModel.convert(unitValue: Double?, inputValue: Double?): CalculatedResultModel {
+    val res = inputValue.let { inputDouble ->
+        val valueDecimal =
+            NSDecimalNumber(inputDouble ?: DOUBLE_EMPTY).decimalNumberByMultiplyingBy(
+                NSDecimalNumber(unitValue ?: DOUBLE_EMPTY)
+            )
         val unitDecimal = NSDecimalNumber(value)
 
         val behavior = NSDecimalNumberHandler(
@@ -18,5 +22,6 @@ actual fun UnitModel.convert(inputValue: String): Double {
         )
 
         valueDecimal.decimalNumberByDividingBy(unitDecimal, behavior).doubleValue
-    } ?: DOUBLE_EMPTY
+    }
+    return CalculatedResultModel(res.toString(), getPlural(res))
 }

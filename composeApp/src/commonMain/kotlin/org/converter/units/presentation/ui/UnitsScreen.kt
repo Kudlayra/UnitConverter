@@ -14,6 +14,7 @@ import org.converter.core.presentation.darkGreen
 import org.converter.core.presentation.input.BaseTextInput
 import org.converter.core.presentation.margin12
 import org.converter.core.presentation.margin16
+import org.converter.units.presentation.UnitsUiEvent
 import org.converter.units.presentation.UnitsViewModel
 import org.converter.units.utils.DOT
 import org.jetbrains.compose.resources.stringResource
@@ -48,8 +49,10 @@ fun UnitsScreen(vm: UnitsViewModel = koinViewModel()) {
                     keyboardType = KeyboardType.Decimal,
                     onValueChange = { text ->
                         vm.inputState.textState.value = text.filter { it.isDigit() || it == DOT }
+                        vm.onEvent(UnitsUiEvent.OnInputValueChanged)
                     }
                 )
+                CalculatedUnitList(listState = vm.convertedList)
             }
         }
     }
