@@ -1,15 +1,14 @@
 package org.converter.units.presentation
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import org.converter.core.presentation.UiEvent
 import org.converter.core.presentation.input.TextInputModel
+import org.converter.core.presentation.viewmodel.BaseViewModel
 import org.converter.units.domain.CalculatedResultModel
 import org.converter.units.domain.UnitModel
 import org.converter.units.domain.UnitType
@@ -17,7 +16,7 @@ import org.converter.units.domain.UnitUseCase
 import org.converter.units.utils.mapToCalculatedList
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class UnitsViewModel(private val unitUseCase: UnitUseCase) : ViewModel() {
+class UnitsViewModel(private val unitUseCase: UnitUseCase) : BaseViewModel() {
 
     val inputState = TextInputModel()
 
@@ -28,8 +27,6 @@ class UnitsViewModel(private val unitUseCase: UnitUseCase) : ViewModel() {
 
     private val _convertedList = MutableStateFlow<List<CalculatedResultModel>?>(null)
     val convertedList = _convertedList.asStateFlow()
-
-    private val uiEvent = MutableSharedFlow<UiEvent?>()
 
     init {
         viewModelScope.launch { unitUseCase.syncUnitList() }
@@ -43,7 +40,7 @@ class UnitsViewModel(private val unitUseCase: UnitUseCase) : ViewModel() {
         }
     }
 
-    fun onEvent(event: UiEvent) {
+    override fun onEvent(event: UiEvent) {
         uiEvent.tryEmit(event)
         when (event) {
             is UnitsUiEvent.OnUnitClick -> setSelectedUnit(event.unit)
