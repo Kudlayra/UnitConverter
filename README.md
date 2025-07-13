@@ -1,14 +1,13 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+Unit Converter — KMP Project with Compose Multiplatform 
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+This is a Unit Converter application developed using Kotlin Multiplatform (KMP) and Compose Multiplatform for the user interface. The project enables users to convert values between various units of measurement using a unified codebase that covers UI, business logic, and network operations.
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+Technologies:
 
+Kotlin Multiplatform (KMP): Used for shared business logic, data handling, and network requests across Android, iOS, and other potential platforms.
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+Compose Multiplatform: Enables building a declarative user interface from a shared Kotlin codebase, delivering native look and performance on supported platforms.
+
+Ktor Client: Used to perform asynchronous network requests (e.g. fetching updated units) from common Kotlin code.
+
+Room: Serves as the local database for storing units of measurement and associated information.
