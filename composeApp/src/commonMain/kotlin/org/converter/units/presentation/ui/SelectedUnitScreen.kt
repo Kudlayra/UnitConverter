@@ -1,12 +1,16 @@
 package org.converter.units.presentation.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
+import org.converter.core.presentation.darkGreen
 import org.converter.core.presentation.input.BaseTextInput
+import org.converter.core.presentation.margin16
 import org.converter.units.presentation.UnitsUiEvent
 import org.converter.units.utils.DOT
 import org.jetbrains.compose.resources.stringResource
@@ -20,7 +24,10 @@ fun SelectedUnitScreen(vm: SelectedUnitViewModel = koinViewModel()) {
     Scaffold(
         content = {
             Row(
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(darkGreen)
+                    .padding(horizontal = margin16)
             ) {
                 BaseTextInput(
                     state = vm.inputState,
@@ -32,10 +39,11 @@ fun SelectedUnitScreen(vm: SelectedUnitViewModel = koinViewModel()) {
                         vm.onEvent(UnitsUiEvent.OnInputValueChanged)
                     }
                 )
+                //todo
                 CalculatedUnit(
                     amount = "",
                     name = ""
-                )
+                ) {}
             }
         }
     )

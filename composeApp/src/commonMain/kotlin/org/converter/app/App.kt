@@ -12,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.converter.core.presentation.darkGreen
 import org.converter.core.presentation.focusClick
+import org.converter.units.presentation.ui.SelectedUnitScreen
 import org.converter.units.presentation.ui.UnitsScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -29,7 +30,10 @@ fun App() {
             startDestination = Route.UnitsScreen
         ) {
             composable<Route.UnitsScreen> {
-                UnitsScreen()
+                UnitsScreen { navController.navigate(it) }
+            }
+            composable<Route.SelectedUnitScreen> {
+                SelectedUnitScreen()
             }
         }
     }

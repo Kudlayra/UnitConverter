@@ -41,7 +41,7 @@ class UnitsViewModel(private val unitUseCase: UnitUseCase) : BaseViewModel() {
     }
 
     override fun onEvent(event: UiEvent) {
-        uiEvent.tryEmit(event)
+        viewModelScope.launch { uiEvent.emit(event) }
         when (event) {
             is UnitsUiEvent.OnUnitClick -> setSelectedUnit(event.unit)
             is UnitsUiEvent.OnSelectType -> selectedType.value = event.type

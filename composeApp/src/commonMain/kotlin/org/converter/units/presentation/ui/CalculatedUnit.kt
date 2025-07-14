@@ -1,5 +1,6 @@
 package org.converter.units.presentation.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.wrapContentSize
@@ -17,10 +18,11 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun CalculatedUnit(
     modifier: Modifier = Modifier,
     amount: String,
-    name: String
+    name: String,
+    onClick: () -> Unit,
 ) {
     Row(
-        modifier,
+        modifier.clickable { onClick() },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(margin4)
     ) {
@@ -40,5 +42,5 @@ fun CalculatedUnit(
 @Preview
 @Composable
 private fun PreviewCalculatedUnit() {
-    CalculatedUnit(amount = "1", name = "kilogram")
+    CalculatedUnit(amount = "1", name = "kilogram") {}
 }

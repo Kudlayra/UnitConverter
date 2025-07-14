@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
+import org.converter.app.Route
 import org.converter.core.presentation.darkGreen
 import org.converter.core.presentation.input.BaseTextInput
 import org.converter.core.presentation.margin12
@@ -24,7 +26,10 @@ import unitconverter.composeapp.generated.resources.enter_a_value
 import unitconverter.composeapp.generated.resources.zero_placeholder
 
 @Composable
-fun UnitsScreen(vm: UnitsViewModel = koinViewModel()) {
+fun UnitsScreen(
+    vm: UnitsViewModel = koinViewModel(),
+    navigate: (Route) -> Unit,
+) {
     Scaffold {
         Row(
             modifier = Modifier
@@ -52,7 +57,17 @@ fun UnitsScreen(vm: UnitsViewModel = koinViewModel()) {
                         vm.onEvent(UnitsUiEvent.OnInputValueChanged)
                     }
                 )
-                CalculatedUnitList(listState = vm.convertedList)
+                CalculatedUnitList(
+                    listState = vm.convertedList
+                ) { vm.onEvent(UnitsUiEvent.OnCalculatedUnitClick) }
+            }
+        }
+    }
+
+    LaunchedEffect(Unit) {
+        vm.uiEvent.collect { event ->
+            when (event) {
+                UnitsUiEvent.OnCalculatedUnitClick -> navigate(Route.SelectedUnitScreen)
             }
         }
     }
