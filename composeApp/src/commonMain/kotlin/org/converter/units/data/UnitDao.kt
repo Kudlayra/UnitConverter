@@ -19,8 +19,11 @@ interface UnitDao {
     @Delete
     suspend fun delete(unit: UnitEntity)
 
-    @Query("SELECT * FROM UnitEntity WHERE selected = 1 LIMIT 1")
+    @Query("SELECT * FROM UnitEntity WHERE selected = 1")
     suspend fun getSelected(): List<UnitEntity>?
+
+    @Query("SELECT * FROM UnitEntity WHERE selected = 1 AND type = :type LIMIT 1")
+    suspend fun getSelectedByType(type: String?): UnitEntity?
 
     @Query("SELECT * FROM UnitEntity WHERE type = :type")
     fun getListFlow(type: String): Flow<List<UnitEntity>?>
@@ -36,4 +39,7 @@ interface UnitDao {
 
     @Upsert
     suspend fun setSelectedUnit(mapToEntity: UnitEntity)
+
+    @Query("SELECT * FROM UnitEntity WHERE name = :name")
+    suspend fun getUnit(name: String): UnitEntity?
 }

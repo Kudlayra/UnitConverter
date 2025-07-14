@@ -13,4 +13,8 @@ interface UnitRepository {
     suspend fun setSelectedUnit(unit: UnitModel)
 
     suspend fun syncUnitList()
+
+    suspend fun getUnit(name: String): UnitModel?
+
+    suspend fun getSelectedByType(type: String?): UnitModel?
 }

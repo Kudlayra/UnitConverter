@@ -10,5 +10,9 @@ class UnitUseCase(private val repository: UnitRepository) {
 
     suspend fun getUnitListFlow(type: String) = repository.getUnitListFlow(type)
 
+    suspend fun getSelectedByType(type: String?) = repository.getSelectedByType(type)
+
     suspend fun syncUnitList() = repository.syncUnitList()
+
+    suspend fun getUnit(name: String) = repository.getUnit(name)
 }

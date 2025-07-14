@@ -1,6 +1,5 @@
 package org.converter.units.presentation.ui
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.wrapContentSize
@@ -8,6 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import org.converter.core.presentation.focusClick
 import org.converter.core.presentation.margin4
 import org.converter.core.presentation.text14GreenBoldStyle
 import org.converter.core.presentation.text14LightGreenBoldStyle
@@ -19,10 +19,10 @@ fun CalculatedUnit(
     modifier: Modifier = Modifier,
     amount: String,
     name: String,
-    onClick: () -> Unit,
+    onClick: (() -> Unit)? = null,
 ) {
     Row(
-        modifier.clickable { onClick() },
+        modifier = modifier.focusClick(onClick = onClick),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(margin4)
     ) {

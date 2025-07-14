@@ -16,7 +16,7 @@ import org.converter.core.presentation.darkGreen
 import org.converter.core.presentation.input.BaseTextInput
 import org.converter.core.presentation.margin12
 import org.converter.core.presentation.margin16
-import org.converter.units.presentation.UnitsUiEvent
+import org.converter.units.presentation.UnitsUiEvent.*
 import org.converter.units.presentation.UnitsViewModel
 import org.converter.units.utils.DOT
 import org.jetbrains.compose.resources.stringResource
@@ -54,12 +54,13 @@ fun UnitsScreen(
                     keyboardType = KeyboardType.Decimal,
                     onValueChange = { text ->
                         vm.inputState.textState.value = text.filter { it.isDigit() || it == DOT }
-                        vm.onEvent(UnitsUiEvent.OnInputValueChanged)
+                        vm.onEvent(OnInputValueChanged)
                     }
                 )
                 CalculatedUnitList(
-                    listState = vm.convertedList
-                ) { vm.onEvent(UnitsUiEvent.OnCalculatedUnitClick) }
+                    listState = vm.convertedList,
+                    onEvent = vm::onEvent
+                )
             }
         }
     }
@@ -67,7 +68,7 @@ fun UnitsScreen(
     LaunchedEffect(Unit) {
         vm.uiEvent.collect { event ->
             when (event) {
-                UnitsUiEvent.OnCalculatedUnitClick -> navigate(Route.SelectedUnitScreen)
+                is OnCalculatedUnitClick -> navigate(Route.SelectedUnitScreen(event.name))
             }
         }
     }

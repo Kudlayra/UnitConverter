@@ -22,7 +22,7 @@ fun Unit(
     modifier: Modifier = Modifier,
     name: String?,
     isSelected: Boolean?,
-    onClick: () -> Unit,
+    onClick: (() -> Unit)? = null,
 ) {
     Text(
         modifier = modifier

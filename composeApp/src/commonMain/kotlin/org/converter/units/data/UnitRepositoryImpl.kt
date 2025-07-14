@@ -40,4 +40,12 @@ class UnitRepositoryImpl(
             }
         }
     }
+
+    override suspend fun getSelectedByType(type: String?): UnitModel? {
+        return safeExecute { cache.getSelectedByType(type)?.mapToDomain() }
+    }
+
+    override suspend fun getUnit(name: String): UnitModel? {
+        return safeExecute { cache.getUnit(name)?.mapToDomain() }
+    }
 }

@@ -36,7 +36,7 @@ fun CalculatedUnitList(
         CalculatedUnit(
             amount = it.value,
             name = it.name
-        ) { onEvent(UnitsUiEvent.OnCalculatedUnitClick) }
+        ) { onEvent(UnitsUiEvent.OnCalculatedUnitClick(it.name)) }
     }
 }
 

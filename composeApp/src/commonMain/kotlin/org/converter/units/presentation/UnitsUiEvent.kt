@@ -8,5 +8,5 @@ sealed interface UnitsUiEvent : UiEvent {
     data class OnUnitClick(val unit: UnitModel) : UnitsUiEvent
     data class OnSelectType(val type: UnitType) : UnitsUiEvent
     data object OnInputValueChanged : UnitsUiEvent
-    data object OnCalculatedUnitClick : UnitsUiEvent
+    data class OnCalculatedUnitClick(val name: String) : UnitsUiEvent
 }
