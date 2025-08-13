@@ -12,7 +12,6 @@ import org.converter.units.domain.UnitRepository
 import org.converter.units.domain.UnitUseCase
 import org.converter.units.presentation.UnitsViewModel
 import org.converter.units.presentation.ui.SelectedUnitViewModel
-import org.converter.units.utils.TemporaryUnitStorage
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
@@ -33,7 +32,6 @@ val sharedModule = module {
             .build()
 
     }
-    single { TemporaryUnitStorage }
     viewModelOf(::UnitsViewModel)
     viewModelOf(::SelectedUnitViewModel)
 }
